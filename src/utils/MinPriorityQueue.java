@@ -1,12 +1,15 @@
 package utils;
 
 public class MinPriorityQueue<T extends Comparable<T>> {
+
+    private static int CAPACITY = 1000;
     
-    /**
-     * Creates an empty queue.
-     */
+    private double[] tree;
+    private int index;
+    
     public MinPriorityQueue() {
-        // TODO implement the constructor
+	tree = new double[CAPACITY];
+	index = 1
     }
 
     /**
@@ -22,6 +25,8 @@ public class MinPriorityQueue<T extends Comparable<T>> {
      */
     public void add(T elem) {
         // TODO implement this method
+	tree[index] = elem;
+	boolean finished = true;
     }
 
     /**
