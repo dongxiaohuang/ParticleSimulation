@@ -13,7 +13,7 @@ public class ParticleParticleCollision extends Collision{
     */
    public void happen(ParticleEventHandler h){
      h.reactTo(this);
-     Particle.collide(particles[0], particles[1]);
+     Particle.collide(this.getParticles[0], this.getParticles[1]);
    }
 
 }

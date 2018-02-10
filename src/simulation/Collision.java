@@ -1,7 +1,7 @@
 package simulation;
 
 public abstract class Collision extends AbstractEvent{
-    protected Particle[] particles;
+    private Particle[] particles;
     /**
      * Constructor for Collision
      */
@@ -32,6 +32,6 @@ public abstract class Collision extends AbstractEvent{
     public Particle[] getParticles() {
         // TODO implement this method
 
-        return null;
+        return particles;
     }
 }
