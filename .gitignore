@@ -9,3 +9,5 @@
 #Ignore generated files
 *.class
 
+#Ignore manual
+*.pdf

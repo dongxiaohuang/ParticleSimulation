@@ -17,8 +17,7 @@ public class MinPriorityQueue<T extends Comparable<T>> {
      * Returns the number of elements currently in the queue.
      */
     public int size() {
-        // TODO implement this method
-        return 0;
+	return tree.length - 1;
     }
     
     /**
@@ -91,8 +90,7 @@ public class MinPriorityQueue<T extends Comparable<T>> {
      * Returns true if the queue is empty, false otherwise.
      */
     public boolean isEmpty() {
-        // TODO implement this method
-        return false;
+	return this.size() == 0;
     }
     
 }
