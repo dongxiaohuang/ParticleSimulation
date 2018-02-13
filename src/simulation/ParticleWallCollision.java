@@ -5,7 +5,7 @@ public class ParticleWallCollision extends Collision{
   /**
    * Constructor for ParticleWallCollision.
    */
-   public ParticleWallCollision(double t, Particle ps, Wall w){
+    public ParticleWallCollision(Particle ps, Wall w, double t){
      super(t, ps);
      wall = w;
    }
