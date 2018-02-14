@@ -79,8 +79,6 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 		}
 
 		if (max_child.compareTo(tree.get(parent_index)) > 0) {
-		    // tree.add(child_index, tree.get(parent_index));
-		    // tree.add(parent_index, max_child);
 		    Collections.swap(tree, child_index, parent_index);
 		    parent_index = child_index;
 		    child_index = parent_index * 2;
