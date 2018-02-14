@@ -20,7 +20,7 @@ public class MinPriorityQueue<T extends Comparable<T>> {
      * Returns the number of elements currently in the queue.
      */
     public int size() {
-	return tree.length() - 1;
+	return tree.size() - 1;
     }
     
     /**
@@ -86,7 +86,8 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 		    finished = true;
 	    }
 	}
-	    
+
+	return removed;
     }
 
     /**
