@@ -1,4 +1,5 @@
 make:
+	rm simulation/*.class
 	javac simulation/SimpleSimulation.java
 	java simulation/SimpleSimulation
 

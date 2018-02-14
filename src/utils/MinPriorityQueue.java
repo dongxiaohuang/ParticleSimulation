@@ -7,12 +7,13 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 
     private static int CAPACITY = 1000;
     private static int ROOT_INDEX = 1;
-    
+
     private List<T> tree;
     private int blank_index;
-    
+
     public MinPriorityQueue() {
-	this.tree = new ArrayList<T>();
+	this.tree = new ArrayList<T>(50);
+  this.tree.add(0, null);
 	this.blank_index = ROOT_INDEX;
     }
 
@@ -22,13 +23,13 @@ public class MinPriorityQueue<T extends Comparable<T>> {
     public int size() {
 	return tree.size() - 1;
     }
-    
+
     /**
      * Adds elem to the queue.
      */
     public void add(T elem) {
 	tree.add(blank_index, elem);
-	
+
 	boolean finished = false;
 	int parent_index = blank_index / 2;
 	int child_index = blank_index;
@@ -61,7 +62,7 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 
 	T removed = tree.get(ROOT_INDEX);
 	tree.add(ROOT_INDEX, tree.get(blank_index-1));
-	
+
 	boolean finished = false;
 	int parent_index = ROOT_INDEX;
 	int child_index = 2 * parent_index;
@@ -86,7 +87,7 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 		    finished = true;
 	    }
 	}
-
+blank_index -= 1;
 	return removed;
     }
 
@@ -96,5 +97,5 @@ public class MinPriorityQueue<T extends Comparable<T>> {
     public boolean isEmpty() {
 	return this.size() == 0;
     }
-    
+
 }
