@@ -54,13 +54,8 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
 
 	    Event event = (Event) mpq.remove();
 	    if (event.isValid()) {
-		System.out.print("fucking2\n");
-		if (event instanceof Tick) {
-		    System.out.print("shit");
-		}
 		double preClock = clock;
 		clock = event.time();
-		System.out.print(clock);
 		model.moveParticles(clock - preClock);
 		event.happen(this); // eventhandler??
 	    }

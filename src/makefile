@@ -1,15 +1,24 @@
 make:
-	rm simulation/*.class
+	if [-a *.class];\
+	then \
+		rm simulation/*.class;\
+	fi;
 	javac simulation/SimpleSimulation.java
 	java simulation/SimpleSimulation
 
 brown:
-	rm simulation/*.class
+	if [-a *.class];\
+	then \
+		rm simulation/*.class;\
+	fi;
 	javac simulation/BrownianSimulation.java
 	java simulation/BrownianSimulation
 
 diffusion:
-	rm simulation/*.class
+	if [-a *.class];\
+	then \
+		rm simulation/*.class;\
+	fi;
 	javac simulation/DiffusionSimulation.java
 	java simulation/DiffusionSimulation
 
