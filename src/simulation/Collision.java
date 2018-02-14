@@ -22,6 +22,7 @@ public abstract class Collision extends AbstractEvent{
     @Override
     public boolean isValid() {
         for(int i=0; i<particles.length; i++) {
+	    System.out.print("particles");
 	    if (particles[i].collisions() != hits[i])
 		return false;
 	}

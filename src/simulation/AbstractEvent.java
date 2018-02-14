@@ -7,7 +7,7 @@ public abstract class AbstractEvent implements Event {
      */
     public AbstractEvent(double time) {
         // TODO implement the constructor
-        _time = time;
+        this._time = time;
 
     }
 

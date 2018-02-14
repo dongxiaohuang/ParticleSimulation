@@ -2,6 +2,7 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class MinPriorityQueue<T extends Comparable<T>> {
 
@@ -13,7 +14,7 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 
     public MinPriorityQueue() {
 	this.tree = new ArrayList<T>(50);
-  this.tree.add(0, null);
+	this.tree.add(0, null);
 	this.blank_index = ROOT_INDEX;
     }
 
@@ -38,9 +39,10 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 		finished = true;
 	    else {
 		if (tree.get(parent_index).compareTo(elem) < 0) {
-		    T temp = tree.get(child_index);
-		    tree.add(child_index, tree.get(parent_index));
-		    tree.add(parent_index, temp);
+		    // T temp = tree.get(child_index);
+		    // tree.add(child_index, tree.get(parent_index));
+		    // tree.add(parent_index, temp);
+		    Collections.swap(tree, child_index, parent_index);
 
 		    child_index = parent_index;
 		    parent_index = parent_index / 2;
@@ -61,7 +63,9 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 	    return null;
 
 	T removed = tree.get(ROOT_INDEX);
-	tree.add(ROOT_INDEX, tree.get(blank_index-1));
+	tree.set(ROOT_INDEX, tree.get(blank_index-1));
+	tree.remove(blank_index-1);
+	blank_index -= 1;
 
 	boolean finished = false;
 	int parent_index = ROOT_INDEX;
@@ -78,8 +82,9 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 		}
 
 		if (max_child.compareTo(tree.get(parent_index)) > 0) {
-		    tree.add(child_index, tree.get(parent_index));
-		    tree.add(parent_index, max_child);
+		    // tree.add(child_index, tree.get(parent_index));
+		    // tree.add(parent_index, max_child);
+		    Collections.swap(tree, child_index, parent_index);
 		    parent_index = child_index;
 		    child_index = parent_index * 2;
 		}
@@ -87,7 +92,6 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 		    finished = true;
 	    }
 	}
-blank_index -= 1;
 	return removed;
     }
 

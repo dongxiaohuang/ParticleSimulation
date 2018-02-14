@@ -27,7 +27,7 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
 
     	Iterable<Collision> cs = model.predictAllCollisions(clock); // intialize 0??
     	for(Collision c: cs){
-    		mpq.add(c);
+	    mpq.add(c);
     	}
 
     }
@@ -48,50 +48,50 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
         // TODO complete implementing this method
         while(!mpq.isEmpty()) {
 
-//        	if (mpq.isHalfFull()) {
-//        		mpq.doubleQSize();
-//        	}
+	    //        	if (mpq.isHalfFull()) {
+	    //        		mpq.doubleQSize();
+	    //        	}
 
-        	Event event = (Event) mpq.remove();
-        	if (event.isValid()) {
-            System.out.print("fucking2\n");
-            if (event instanceof Tick) {
-              System.out.print("shit");
-            }
-        		double preClock = clock;
-        		clock = event.time();
-            System.out.print(clock - preClock);
-        		model.moveParticles(clock - preClock);
-        		event.happen(this); // eventhandler??
-        	}
+	    Event event = (Event) mpq.remove();
+	    if (event.isValid()) {
+		System.out.print("fucking2\n");
+		if (event instanceof Tick) {
+		    System.out.print("shit");
+		}
+		double preClock = clock;
+		clock = event.time();
+		System.out.print(clock);
+		model.moveParticles(clock - preClock);
+		event.happen(this); // eventhandler??
+	    }
         }
     }
 
-	@Override
-	public void reactTo(Tick tick) {
-    System.out.print("fucking\n");
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(FRAME_INTERVAL_MILLIS);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		screen.update();
-		mpq.add(new Tick(tick.time() + 1));
+    @Override
+    public void reactTo(Tick tick) {
+	// TODO Auto-generated method stub
+	try {
+	    Thread.sleep(FRAME_INTERVAL_MILLIS);
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	screen.update();
+	System.out.print(tick.time() + 1);
+	mpq.add(new Tick(tick.time() + 1));
+    }
+
+    @Override
+    public void reactTo(Collision c) {
+	// TODO Auto-generated method stub
+	Particle[] particles = c.getParticles();
+	for(Particle p: particles) {
+	    Iterable<Collision> cs = model.predictCollisions(p, c.time());
+	    for(Collision newc: cs) {
+		mpq.add(newc);
+	    }
 	}
 
-	@Override
-	public void reactTo(Collision c) {
-		// TODO Auto-generated method stub
-		Particle[] particles = c.getParticles();
-		for(Particle p: particles) {
-			Iterable<Collision> cs = model.predictCollisions(p, c.time());
-			for(Collision newc: cs) {
-				mpq.add(newc);
-			}
-		}
-
-	}
+    }
 
 }
