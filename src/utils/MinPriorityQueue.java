@@ -32,17 +32,17 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 	tree.add(blank_index, elem);
 
 	boolean finished = false;
-	int parent_index = blank_index / 2;
 	int child_index = blank_index;
+	int parent_index = child_index / 2;
 	while (!finished) {
 	    if (parent_index == 0)
 		finished = true;
 	    else {
-		if (tree.get(parent_index).compareTo(elem) < 0) {
+		if (tree.get(parent_index).compareTo(elem) > 0) {
 		    Collections.swap(tree, child_index, parent_index);
 
 		    child_index = parent_index;
-		    parent_index = parent_index / 2;
+		    parent_index = child_index / 2;
 		}
 		else
 		    finished = true;
@@ -71,14 +71,14 @@ public class MinPriorityQueue<T extends Comparable<T>> {
 	    if (child_index >= blank_index)
 		finished = true;
 	    else {
-		T max_child = tree.get(child_index);
+		T min_child = tree.get(child_index);
 		int c_neigh_index = child_index + 1;
-		if (c_neigh_index<blank_index && max_child.compareTo(tree.get(c_neigh_index))<0) {
-		    max_child = tree.get(c_neigh_index);
+		if (c_neigh_index<blank_index && min_child.compareTo(tree.get(c_neigh_index))>0) {
+		    min_child = tree.get(c_neigh_index);
 		    child_index = c_neigh_index;
 		}
 
-		if (max_child.compareTo(tree.get(parent_index)) > 0) {
+		if (min_child.compareTo(tree.get(parent_index)) < 0) {
 		    Collections.swap(tree, child_index, parent_index);
 		    parent_index = child_index;
 		    child_index = parent_index * 2;

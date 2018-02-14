@@ -56,6 +56,7 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
 	    if (event.isValid()) {
 		double preClock = clock;
 		clock = event.time();
+		System.out.println(clock);
 		model.moveParticles(clock - preClock);
 		event.happen(this); // eventhandler??
 	    }
@@ -72,7 +73,6 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
 	    e.printStackTrace();
 	}
 	screen.update();
-	System.out.print(tick.time() + 1);
 	mpq.add(new Tick(tick.time() + 1));
     }
 
