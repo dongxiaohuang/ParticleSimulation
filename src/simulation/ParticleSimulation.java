@@ -25,7 +25,7 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
     	mpq = new MinPriorityQueue<Event>();
     	mpq.add(new Tick(1));
 
-    	Iterable<Collision> cs = model.predictAllCollisions(clock); // intialize 0??
+    	Iterable<Collision> cs = model.predictAllCollisions(clock);
     	for(Collision c: cs){
     		mpq.add(c);
     	}
@@ -48,16 +48,12 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
         // TODO complete implementing this method
         while(!mpq.isEmpty()) {
         	
-//        	if (mpq.isHalfFull()) {
-//        		mpq.doubleQSize();
-//        	}
-        	
         	Event event = (Event) mpq.remove();
         	if (event.isValid()) {
         		double preClock = clock;
         		clock = event.time();
         		model.moveParticles(clock - preClock);
-        		event.happen(this); // eventhandler??
+        		event.happen(this);
         	}
         }
     }
