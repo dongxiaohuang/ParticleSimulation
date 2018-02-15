@@ -7,7 +7,7 @@ public abstract class AbstractEvent implements Event {
      */
     public AbstractEvent(double time) {
         // TODO implement the constructor
-        _time = time;
+        this._time = time;
 
     }
 
@@ -27,9 +27,9 @@ public abstract class AbstractEvent implements Event {
     public int compareTo(Event that) {
         // TODO implement this method
         if(_time < that.time())
-          return 1; // less priority
+          return -1; // less priority
         else if(_time > that.time())
-          return -1; // high priority
+          return 1; // high priority
         return 0;
     }
 

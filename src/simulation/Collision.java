@@ -2,6 +2,7 @@ package simulation;
 
 public abstract class Collision extends AbstractEvent{
     private Particle[] particles;
+    private int[] hits;
     /**
      * Constructor for Collision
      */
@@ -9,7 +10,10 @@ public abstract class Collision extends AbstractEvent{
         // TODO implement constructor
         super(t);
         particles = ps;
-
+	hits = new int[ps.length];
+	for (int i=0; i<ps.length; i++) {
+	    hits[i] = ps[i].collisions();
+	}
     }
 
     /**
@@ -17,13 +21,11 @@ public abstract class Collision extends AbstractEvent{
      */
     @Override
     public boolean isValid() {
-        // TODO implement his method
-        for(int i =0; i < particles.length; i++)
-        {
-          if(!particles[i].isValid())
-            return false;
-        }
-        return true;
+        for(int i=0; i<particles.length; i++) {
+	    if (particles[i].collisions() != hits[i])
+		return false;
+	}
+	return true;
     }
 
     /**

@@ -8,12 +8,12 @@ import utils.MinPriorityQueue;
 public class ParticleSimulation implements Runnable, ParticleEventHandler{
 
     private static final long FRAME_INTERVAL_MILLIS = 40;
-    
+
     private final ParticlesModel          model;
     private final ParticlesView           screen;
-    private MinPriorityQueue			  mpq;	
+    private MinPriorityQueue			  mpq;
     private double 						  clock;
-    
+
     /**
      * Constructor.
      */
@@ -27,9 +27,9 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
 
     	Iterable<Collision> cs = model.predictAllCollisions(clock);
     	for(Collision c: cs){
-    		mpq.add(c);
+	    mpq.add(c);
     	}
-    	
+
     }
 
     /**
@@ -44,9 +44,10 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         // TODO complete implementing this method
         while(!mpq.isEmpty()) {
+
         	
         	Event event = (Event) mpq.remove();
         	if (event.isValid()) {
@@ -55,33 +56,34 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
         		model.moveParticles(clock - preClock);
         		event.happen(this);
         	}
+
         }
     }
 
-	@Override
-	public void reactTo(Tick tick) {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(FRAME_INTERVAL_MILLIS);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		screen.update();
-		mpq.add(new Tick(tick.time() + 1));
+    @Override
+    public void reactTo(Tick tick) {
+	// TODO Auto-generated method stub
+	try {
+	    Thread.sleep(FRAME_INTERVAL_MILLIS);
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	screen.update();
+	mpq.add(new Tick(tick.time() + 1));
+    }
+
+    @Override
+    public void reactTo(Collision c) {
+	// TODO Auto-generated method stub
+	Particle[] particles = c.getParticles();
+	for(Particle p: particles) {
+	    Iterable<Collision> cs = model.predictCollisions(p, c.time());
+	    for(Collision newc: cs) {
+		mpq.add(newc);
+	    }
 	}
 
-	@Override
-	public void reactTo(Collision c) {
-		// TODO Auto-generated method stub
-		Particle[] particles = c.getParticles();
-		for(Particle p: particles) {
-			Iterable<Collision> cs = model.predictCollisions(p, c.time());
-			for(Collision newc: cs) {
-				mpq.add(newc);
-			}
-		}
-		
-	}
+    }
 
 }

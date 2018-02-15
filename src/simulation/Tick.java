@@ -1,11 +1,11 @@
 package simulation;
 
-public class Ticks extends AbstractEvent{
+public class Tick extends AbstractEvent{
 
     /**
-     * Constructor for Ticks
+     * Constructor for Tick
      */
-    public Ticks(double time) {
+    public Tick(double time) {
         // TODO implement constructor
         super(time);
     }
@@ -20,7 +20,7 @@ public class Ticks extends AbstractEvent{
     }
 
     /**
-     * When Ticks event happen, make a callback to the ParticleEventHandler
+     * When Tick event happen, make a callback to the ParticleEventHandler
      */
     public void happen(ParticleEventHandler h){
       h.reactTo(this);
